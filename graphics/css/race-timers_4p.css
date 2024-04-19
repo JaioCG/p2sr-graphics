@@ -41,7 +41,7 @@ body {
 
     font-size: 36px;
     line-height: 42px;
-    color: #fff;
+    color: #F2FBFF;
     text-align: center;
 }
 
@@ -63,6 +63,43 @@ body {
 
     font-size: 36px;
     line-height: 42px;
-    color: #000;
+    color: #000A14;
     text-align: center;
+}
+
+.runner-name {
+    width: 472px;
+    height: 75px;
+
+    font-size: 48px;
+    line-height: 75px;
+    color: #F2FBFF;
+}
+
+#runner1 {
+    position: absolute;
+    text-align: left;
+    left: 8px;
+    top: 413px;
+}
+
+#runner2 {
+    position: absolute;
+    text-align: right;
+    left: 1440px;
+    top: 413px;
+}
+
+#runner3 {
+    position: absolute;
+    text-align: left;
+    left: 8px;
+    top: 903px;
+}
+
+#runner4 {
+    position: absolute;
+    text-align: right;
+    left: 1440px;
+    top: 903px;
 }

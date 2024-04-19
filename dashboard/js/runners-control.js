@@ -1,5 +1,5 @@
 // Create replicants
-const runnerNamesRep = nodecg.Replicant('runnerNames', {defaultValue: ['Runner 1', 'Runner 2', 'Runner 3']});
+const runnerNamesRep = nodecg.Replicant('runnerNames', {defaultValue: ['Runner 1', 'Runner 2', 'Runner 3', 'Runner 4']});
 
 // Update replicants
 document.getElementById('submit').addEventListener('click', function() {
@@ -7,6 +7,7 @@ document.getElementById('submit').addEventListener('click', function() {
     runnerNamesRep.value = [
         document.getElementById('runner1').value,
         document.getElementById('runner2').value,
-        document.getElementById('runner3').value
+        document.getElementById('runner3').value,
+        document.getElementById('runner4').value
     ];
 });
