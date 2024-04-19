@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+
+        <style>
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto;
+                grid-gap: 5px;
+                padding: 0px;
+            }
+
+            .grid-item {
+                padding: 4px;
+            }
+        </style>
+	</head>
+	<body>
+        <div class="grid-container">
+            <div class="grid-item">Comm 1</div>
+            <input type="text" class="grid-item" id="comm1" value="Commentary 1">
+            <div class="grid-item">Comm 2</div>
+            <input type="text" class="grid-item" id="comm2" value="Commentary 2">
+            <div class="grid-item">Comm 3</div>
+            <input type="text" class="grid-item" id="comm3" value="Commentary 3">
+        </div>
+
+        <br>
+        <button id="submit">Submit Changes</button>
+
+		<script src="./js/commentary-control.js"></script>
+	</body>
+</html>
