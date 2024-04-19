@@ -1,0 +1,12 @@
+#omnibar-container {
+    position: absolute;
+    left: 0px;
+    top: 980px;
+    width: 1920px;
+    height: 100px;
+
+    font-size: 48px;
+    line-height: 100px;
+    color: #F2FBFF;
+    text-align: center;
+}
