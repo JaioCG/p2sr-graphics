@@ -22,13 +22,6 @@
     "compatibleRange": "^2.0.0",
     "dashboardPanels": [
       {
-        "name": "runners-control",
-        "title": "Runners Control",
-        "width": 3,
-        "file": "runners-control.html",
-        "headerColor": "#525F78"
-      },
-      {
         "name": "commentary-control",
         "title": "Commentary Control",
         "width": 3,
@@ -45,6 +38,12 @@
       },
       {
         "file": "race-timers_4p.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "omnibar.html",
         "width": 1920,
         "height": 1080,
         "singleInstance": false
