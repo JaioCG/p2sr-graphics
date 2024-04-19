@@ -1,0 +1,68 @@
+.oswald-semibold {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+.oswald-medium {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ccc;
+}
+
+.bg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+#commentary-container {
+    position: absolute;
+    left: 732px;
+    top: 297px;
+    width: 456px;
+    height: 308px;
+}
+
+#comm-title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 456px;
+    height: 48px;
+
+    font-size: 36px;
+    line-height: 42px;
+    color: #fff;
+    text-align: center;
+}
+
+#comm-names {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    left: 0px;
+    top: 50px;
+}
+
+.comm-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 456px;
+    height: 86px;
+
+    font-size: 36px;
+    line-height: 42px;
+    color: #000;
+    text-align: center;
+}
