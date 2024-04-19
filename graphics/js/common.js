@@ -4,7 +4,7 @@ const commNamesRep = nodecg.Replicant('commNames', {defaultValue: ['Comm 1', 'Co
 // Update replicants
 commNamesRep.on('change', function(newValue) {
     console.log('Updating commentary');
-    document.getElementById('comm1').innerHTML = newValue[0];
-    document.getElementById('comm2').innerHTML = newValue[1];
-    document.getElementById('comm3').innerHTML = newValue[2];
+    $('comm1').html = newValue[0];
+    $('comm2').html = newValue[1];
+    $('comm3').html = newValue[2];
 });
