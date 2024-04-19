@@ -2,36 +2,25 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<style>
-			body {
-				font-family: sans-serif;
-			}
 
-			.monospace {
-				font-family: monospace;
-			}
-		</style>
-		<script type="module" src="./index.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="./css/fullscreen-1p.css" />
 	</head>
 	<body>
-		<p>
-			Hello, I'm one of the graphics in your bundle! I'm where you put the graphics you want to run in your
-			broadcast software!
-		</p>
+        <img src="./assets/fullscreen_1p.png" class="bg" />
 
-		<p>
-			To edit me, open "<span class="monospace">src/graphics/index.html</span>" and "<span class="monospace"
-				>src/graphics/index.js</span
-			>" in your favorite text editor or IDE.
-		</p>
+        <div id="commentary-container">
+            <div class="oswald-semibold" id="comm-title">Commentary</div>
+            <div id="comm-names">
+                <div class="comm-item oswald-medium" id="comm1">Commentary 1</div>
+                <div class="comm-item oswald-medium" id="comm2">Commentary 2</div>
+                <div class="comm-item oswald-medium" id="comm3">Commentary 3</div>
+            </div>
+        </div>
 
-		<p>You can use any libraries, frameworks, and tools you want. There are no limits.</p>
-
-		<p>
-			Visit <a href="https://nodecg.dev" target="_blank" rel="noopener">https://nodecg.dev</a> for full
-			documentation.
-		</p>
-
-		<p>Have fun!</p>
+        <script src="./js/fullscreen-1p.js"></script>
 	</body>
 </html>
