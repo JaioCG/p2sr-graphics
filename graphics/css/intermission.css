@@ -1,0 +1,38 @@
+#brb-text {
+    position: absolute;
+    left: 0px;
+    top: -64px;
+    width: 1920px;
+    height: 1080px;
+
+    font-size: 128px;
+    line-height: 1080px;
+    color: #000A14;
+    text-align: center;
+}
+
+#next-event-text {
+    position: absolute;
+    left: 0px;
+    top: 32px;
+    width: 1920px;
+    height: 1080px;
+
+    font-size: 72px;
+    line-height: 1080px;
+    color: #000A14;
+    text-align: center;
+}
+
+#mel-text {
+    position: absolute;
+    left: 1370px;
+    top: 928px;
+    width: 700px;
+    height: 50px;
+
+    font-size: 36px;
+    line-height: 50px;
+    color: #000A14;
+    opacity: 0.5;
+}
