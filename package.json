@@ -63,5 +63,8 @@
     ]
   },
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "therungg": "^1.2.2"
+  }
 }
