@@ -37,12 +37,6 @@
         "singleInstance": false
       },
       {
-        "file": "race-timers_4p.html",
-        "width": 1920,
-        "height": 1080,
-        "singleInstance": false
-      },
-      {
         "file": "omnibar.html",
         "width": 1920,
         "height": 1080,
