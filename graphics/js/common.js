@@ -1,19 +1,5 @@
 'use strict';
-$(() => {
-    // Create custom replicants
-    const commNamesRep = nodecg.Replicant('commNames', {defaultValue: ['Comm 1', 'Comm 2', 'Comm 3']});
-
-    // Update custom replicants
-    commNamesRep.on('change', function(newValue) {
-        console.log('Updating commentary');
-        document.getElementById('comm1').innerHTML = newValue[0];
-        document.getElementById('comm2').innerHTML = newValue[1];
-        document.getElementById('comm3').innerHTML = newValue[2];
-    });
-
-	// The bundle name where all the run information is pulled from.
-	var speedcontrolBundle = 'nodecg-speedcontrol';
-	
+$(() => {	
 	// JQuery selectors.
 	var gameTitle = $('#gameTitle');
     var players = $('#players');
@@ -21,29 +7,30 @@ $(() => {
     var player2 = $('#player2');
     var player3 = $('#player3');
     var player4 = $('#player4');
+    var comm1 = $('#comm1');
+    var comm2 = $('#comm2');
+    var comm3 = $('#comm3');
 	
-	// This is where the information is received for the run we want to display.
-	// The "change" event is triggered when the current run is changed.
-	var runDataActiveRun = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
-	runDataActiveRun.on('change', (newVal) => {
-		if (newVal)
-			updateSceneFields(newVal);
-	});
-	
-	// Sets information on the pages for the run.
-	function updateSceneFields(runData) {
-        console.log(runData);
-		gameTitle.html(runData.game);
+    // Update on-screen information from custom replicants
+    var commNamesRep = nodecg.Replicant('commNames', {defaultValue: ['Comm 1', 'Comm 2', 'Comm 3']});
+    commNamesRep.on('change', function(newVal) {
+        if (comm1.length) comm1.html(newVal[0]);
+        if (comm2.length) comm2.html(newVal[1]);
+        if (comm3.length) comm3.html(newVal[2]);
+    });
 
-		// Checks if we are on the player.html/twitch.html page.
-		// This is done by checking if the #player/#twitch span exists.
-		if (players.length || player1.length) {
-			var team = runData.teams[0];
-			
-			// If a team has multiple players, this currently just outputs them in a comma'd list.
-			if (team) {
-				players.html(team.players.map((player) => player.name).join(', '));
-			}
-		}
-	}
+	// Update on-screen information from speedcontrol
+	var runDataActiveRun = nodecg.Replicant('runDataActiveRun', 'nodecg-speedcontrol');
+	runDataActiveRun.on('change', (newVal) => {
+		if (newVal) {
+            // Set game title (usually tournament match number)
+            if (gameTitle.length) gameTitle.html(newVal.game);
+
+            // Update omnibar
+            if (players.length) {
+                var team = newVal.teams[0];
+                if (team) players.html(team.players.map((player) => player.name).join(', '));
+            }
+        }
+	});
 });

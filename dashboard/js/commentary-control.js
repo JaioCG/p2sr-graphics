@@ -1,5 +1,5 @@
 // Create replicants
-const commNamesRep = nodecg.Replicant('commNames', {defaultValue: ['Comm 1', 'Comm 2', 'Comm 3']});
+var commNamesRep = nodecg.Replicant('commNames', {defaultValue: ['Comm 1', 'Comm 2', 'Comm 3']});
 
 // Update replicants
 document.getElementById('submit').addEventListener('click', function() {
