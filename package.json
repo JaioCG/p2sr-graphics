@@ -27,13 +27,6 @@
         "width": 3,
         "file": "commentary-control.html",
         "headerColor": "#525F78"
-      },
-      {
-        "name": "players-control",
-        "title": "Players Control",
-        "width": 3,
-        "file": "players-control.html",
-        "headerColor": "#525F78"
       }
     ],
     "graphics": [
