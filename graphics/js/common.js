@@ -23,6 +23,12 @@ $(() => {
 	var runDataActiveRun = nodecg.Replicant('runDataActiveRun', 'nodecg-speedcontrol');
 	runDataActiveRun.on('change', (newVal) => {
 		if (newVal) {
+            // Send Twitch information to extension
+            var twitchUsernames;
+            var team = newVal.teams[0];
+            if (team) twitchUsernames = team.players.map((player) => player.social.twitch);
+            nodecg.sendMessage('twitchUsernames', twitchUsernames);
+
             // Set game title (usually tournament match number)
             if (gameTitle.length) gameTitle.html(newVal.game);
 
