@@ -30,13 +30,12 @@
     </div>
 
     <script src="./js/common.js"></script>
-    <script src="./js/therun.js"></script>
     <script>
         // Switching the content of the omnibar
         var divs = $('div[id^="content-"]').hide(), i = 0;
         (function cycle() { 
             divs.eq(i).fadeIn(1000)
-                .delay(5000) // REPLACE THIS VALUE TO CHANGE TEXT DURATION
+                .delay(10000) // REPLACE THIS VALUE TO CHANGE TEXT DURATION
                 .fadeOut(1000, cycle);
 
             i = ++i % divs.length;

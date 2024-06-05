@@ -22,34 +22,30 @@ function updateSplitData(data)
     // Random Math Stuff
     var  possibleTimesave = data.run.splits[data.run.currentSplitIndex].pbSplitTime - data.run.splits[data.run.currentSplitIndex].bestPossible;
 
-    // Personal Best Time (trgg)
-    // Sum of Best (trgg)
-    // Best Possible Time (trgg)
-    // Current Split (trgg)
-    // Possible Time Save (trgg)
     return {
         'pbTime'            : msToTime(data.run.pb),
         'sumOfBest'         : msToTime(data.run.sob),
         'bestPossibleTime'  : msToTime(data.run.bestPossible),
         'currentSplit'      : data.run.currentSplitName,
-        'possibleTimeSave'  : msToTime(possibleTimesave)
+        'possibleTimeSave'  : msToTime(possibleTimesave),
+        'currentTime'       : data.run.currentTime // used for delta against other runner
     };
 }
 
 // Util function to convert ms to more readable time format
 function msToTime(duration)
 {
-    var milliseconds = Math.floor((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    var milliseconds    = Math.floor((duration % 1000) / 100),
+        seconds         = Math.floor((duration / 1000) % 60),
+        minutes         = Math.floor((duration / (1000 * 60)) % 60),
+        hours           = Math.floor((duration / (1000 * 60 * 60)) % 24);
   
-    hours = (hours < 10) ? "0" + hours : hours;
+    hours   = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
   
     if (hours == "00") {
-      return minutes + ":" + seconds + "." + milliseconds;
+        return minutes + ":" + seconds + "." + milliseconds;
     } else {
         return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
     }
