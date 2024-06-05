@@ -1,26 +1,71 @@
+/* Font definitions */
 .oswald-semibold {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
-  }
-
+}
 .oswald-medium {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-  }
-  
+}
+.oswald-regular {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Main Body definitions */
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #ccc;
-  }
-
+}
 .bg {
     position: absolute;
     left: 0px;
     top: 0px;
+}
+
+/* Commentary container definitions (container pos in individual CSS files)*/
+#commentary-container {
+    position: absolute;
+    width: 408px;
+    height: 308px;
+}
+#comm-title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 408px;
+    height: 48px;
+
+    font-size: 36px;
+    line-height: 42px;
+    color: #F2FBFF;
+    text-align: center;
+}
+#comm-names {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    left: 0px;
+    top: 50px;
+}
+.comm-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 408px;
+    height: 86px;
+
+    font-size: 36px;
+    line-height: 42px;
+    color: #000A14;
+    text-align: center;
 }
