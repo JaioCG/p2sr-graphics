@@ -65,6 +65,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "node-speedrun": "^1.2.0",
     "therungg": "^1.2.2"
   }
 }
