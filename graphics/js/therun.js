@@ -28,14 +28,14 @@ nodecg.listenFor('therunP2', (newVal) => {
 function updateSplitData(data)
 {
     // Random Math Stuff
-    var  possibleTimesave = data.run.splits[data.run.currentSplitIndex].pbSplitTime - data.run.splits[data.run.currentSplitIndex].bestPossible;
+    var  possTimesave = data.run.splits[data.run.currentSplitIndex].single.time - data.run.splits[data.run.currentSplitIndex].single.bestAchievedTime;
 
     return {
         'pbTime'            : msToTime(data.run.pb),
-        'pbDelta'           : showPlusMinus(data.run.delta, msToTime(data.run.delta)),
+        'pbDelta'           : msToTime(data.run.delta),
         'sumOfBest'         : msToTime(data.run.sob),
         'bestPossibleTime'  : msToTime(data.run.bestPossible),
-        'possibleTimeSave'  : msToTime(possibleTimesave),
+        'possibleTimeSave'  : msToTime(possTimesave),
         'currentTime'       : data.run.currentTime // used for delta against other runner
     };
 }
@@ -43,19 +43,34 @@ function updateSplitData(data)
 // Util function to convert ms to more readable time format
 function msToTime(duration)
 {
-    var milliseconds    = Math.floor((duration % 1000) / 100),
-        seconds         = Math.floor((duration / 1000) % 60),
-        minutes         = Math.floor((duration / (1000 * 60)) % 60),
-        hours           = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    var newDir, isNegative = false;
+    if (duration < 0) {
+        isNegative = true;
+        newDir = duration * -1;
+    } else {
+        newDir = duration;
+    }
+
+    var milliseconds    = Math.floor((newDir % 1000) / 100),
+        seconds         = Math.floor((newDir / 1000) % 60),
+        minutes         = Math.floor((newDir / (1000 * 60)) % 60),
+        hours           = Math.floor((newDir / (1000 * 60 * 60)) % 24);
   
     hours   = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
-  
-    if (hours == "00")
-        return minutes + ":" + seconds + "." + milliseconds;
-    else
-        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+
+    if (isNegative) {
+        if (hours == "00")
+            return "-" + minutes + ":" + seconds + "." + milliseconds;
+        else
+            return "-" + hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    } else {
+        if (hours == "00")
+            return minutes + ":" + seconds + "." + milliseconds;
+        else
+            return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    }
 }
 
 function showPlusMinus(delta, msToTimeOutput)
