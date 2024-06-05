@@ -22,8 +22,14 @@ module.exports = async function (nodecg) {
         const ws2 = new LiveWebSocket(usernames[1]);
         ws1.onOpen = () => { console.log(`Connected to therun.gg for ${usernames[0]}`); }
         ws2.onOpen = () => { console.log(`Connected to therun.gg for ${usernames[1]}`); }
-        ws1.onMessage = (data) => { nodecg.sendMessage('therunP1', data); }
-        ws2.onMessage = (data) => { nodecg.sendMessage('therunP2', data); }
+        ws1.onMessage = (data) => {
+            console.log(`Data recieved for ${usernames[0]}. Current split: ${data.run.currentSplitName}`);
+            nodecg.sendMessage('therunP1', data);
+        }
+        ws2.onMessage = (data) => {
+            console.log(`Data recieved for ${usernames[1]}. Current split: ${data.run.currentSplitName}`);
+            nodecg.sendMessage('therunP2', data);
+        }
     });
 };
 

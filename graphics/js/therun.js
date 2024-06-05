@@ -7,13 +7,21 @@ const player2DataRep = nodecg.Replicant('player2Data');
 // Listen for live data from therun.gg
 nodecg.listenFor('therunP1', (newVal) => {
     console.log(newVal);
-    //player1Data.push(updateSplitData(newVal));
-    //player1DataRep.value = player1Data;
+    if (newVal.run.currentSplitIndex == 0) {
+        player1Data = [];
+        player1DataRep.value = player1Data;
+    }
+    player1Data.push(updateSplitData(newVal));
+    player1DataRep.value = player1Data;
 });
 nodecg.listenFor('therunP2', (newVal) => {
     console.log(newVal);
-    //player2Data.push(updateSplitData(newVal));
-    //player2DataRep.value = player2Data;
+    if (newVal.run.currentSplitIndex == 0) {
+        player2Data = [];
+        player2DataRep.value = player2Data;
+    }
+    player2Data.push(updateSplitData(newVal));
+    player2DataRep.value = player2Data;
 });
 
 // Function to update all data for a player and add to array
@@ -21,11 +29,10 @@ function updateSplitData(data)
 {
     // Random Math Stuff
     var  possibleTimesave = data.run.splits[data.run.currentSplitIndex].pbSplitTime - data.run.splits[data.run.currentSplitIndex].bestPossible;
-    var pbDelta = data.run.currentTime - data.run.splits[data.run.currentSplitIndex].total.time;
 
     return {
         'pbTime'            : msToTime(data.run.pb),
-        'pbDelta'           : showPlusMinus(pbDelta, msToTime(pbDelta)),
+        'pbDelta'           : showPlusMinus(data.run.delta, msToTime(data.run.delta)),
         'sumOfBest'         : msToTime(data.run.sob),
         'bestPossibleTime'  : msToTime(data.run.bestPossible),
         'possibleTimeSave'  : msToTime(possibleTimesave),
@@ -51,9 +58,9 @@ function msToTime(duration)
         return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
 }
 
-function showPlusMinus(input, msToTimeOutput)
+function showPlusMinus(delta, msToTimeOutput)
 {
-    if (input < 0)
+    if (delta < 0)
         return "-" + msToTimeOutput;
     else
         return "+" + msToTimeOutput;
