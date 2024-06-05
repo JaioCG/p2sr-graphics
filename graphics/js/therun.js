@@ -21,12 +21,13 @@ function updateSplitData(data)
 {
     // Random Math Stuff
     var  possibleTimesave = data.run.splits[data.run.currentSplitIndex].pbSplitTime - data.run.splits[data.run.currentSplitIndex].bestPossible;
+    var pbDelta = data.run.currentTime - data.run.splits[data.run.currentSplitIndex].total.time;
 
     return {
         'pbTime'            : msToTime(data.run.pb),
+        'pbDelta'           : showPlusMinus(pbDelta, msToTime(pbDelta)),
         'sumOfBest'         : msToTime(data.run.sob),
         'bestPossibleTime'  : msToTime(data.run.bestPossible),
-        'currentSplit'      : data.run.currentSplitName,
         'possibleTimeSave'  : msToTime(possibleTimesave),
         'currentTime'       : data.run.currentTime // used for delta against other runner
     };
@@ -44,9 +45,16 @@ function msToTime(duration)
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
   
-    if (hours == "00") {
+    if (hours == "00")
         return minutes + ":" + seconds + "." + milliseconds;
-    } else {
+    else
         return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-    }
+}
+
+function showPlusMinus(input, msToTimeOutput)
+{
+    if (input < 0)
+        return "-" + msToTimeOutput;
+    else
+        return "+" + msToTimeOutput;
 }
