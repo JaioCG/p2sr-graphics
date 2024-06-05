@@ -30,6 +30,8 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 
+    width: 408px;
+
     position: absolute;
     left: 0px;
     top: 50px;
@@ -40,7 +42,7 @@
     justify-content: center;
 
     font-size: 24px;
-    line-height: 21.5px;
+    line-height: 43px;
     color: #000A14;
     text-align: center;
 }
@@ -64,9 +66,9 @@
 
 .left {
     justify-content: left;
-    padding-left: 8px;
+    margin-left: 8px;
 }
 .right {
     justify-content: right;
-    padding-right: 8px;
+    margin-right: 8px;
 }
