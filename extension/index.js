@@ -7,13 +7,21 @@ module.exports = async function (nodecg) {
     const player1DataRep = nodecg.Replicant('player1Data');
     const player2DataRep = nodecg.Replicant('player2Data');
 
-    // Reset all arrays from dashboard panel
-    nodecg.listenFor('resetAllArrays', () => {
+    // Util function to reset all arrays
+    function resetArrays()
+    {
         player1Data = [];
         player2Data = [];
         player1DataRep.value = player1Data;
         player2DataRep.value = player2Data;
         console.log("Arrays reset from dashboard");
+
+        nodecg.sendMessage('resetSplitsArrays');
+    }
+
+    // Reset all arrays from dashboard panel
+    nodecg.listenFor('resetAllArrays', () => {
+        resetArrays();
     });
 
     // Populate variables from usernames taken from speedcontrol
@@ -25,10 +33,7 @@ module.exports = async function (nodecg) {
             return;
         }
         // Else, add new Twitch usernames to array, clear splits arrays, and continue
-        player1Data = [];
-        player2Data = [];
-        player1DataRep.value = player1Data;
-        player2DataRep.value = player2Data;
+        resetArrays();
         usernames = newVal;
         console.log(usernames[0], usernames[1]);
 

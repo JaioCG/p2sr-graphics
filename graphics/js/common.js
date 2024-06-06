@@ -70,15 +70,26 @@ runDataActiveRun.on('change', (newVal) => {
 // Get therun.gg statistics from extension
 const player1DataRep = nodecg.Replicant('player1Data');
 const player2DataRep = nodecg.Replicant('player2Data');
+var player1SplitTimes = [], player2SplitTimes = [];
+
+nodecg.listenFor('resetSplitsArrays', () => {
+    player1SplitTimes = [];
+    player2SplitTimes = [];
+});
+
 player1DataRep.on('change', (newVal) => {
-    let arr = JSON.parse(JSON.stringify(newVal));
-    console.log(arr);
-    updateStats(1, arr);
+    let data = JSON.parse(JSON.stringify(newVal));
+    console.log(data);
+    updateStats(1, data);
+    player1SplitTimes.push(data[data.length - 1].currentTime);
+    console.log(player1SplitTimes);
 });
 player2DataRep.on('change', (newVal) => {
-    let arr = JSON.parse(JSON.stringify(newVal));
-    console.log(arr);
-    updateStats(2, arr);
+    let data = JSON.parse(JSON.stringify(newVal));
+    console.log(data);
+    updateStats(2, data);
+    player2SplitTimes.push(data[data.length - 1].currentTime);
+    console.log(player2SplitTimes);
 });
 
 // Update statistics on screen
