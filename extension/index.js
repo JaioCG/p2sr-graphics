@@ -42,6 +42,8 @@ module.exports = async function (nodecg) {
         const ws2 = new LiveWebSocket(usernames[1]);
         ws1.onOpen = () => { console.log(`Connected to therun.gg for ${usernames[0]}`); }
         ws2.onOpen = () => { console.log(`Connected to therun.gg for ${usernames[1]}`); }
+        ws1.onClose = () => { console.log(`Disconnected from therun.gg for ${usernames[0]}`); }
+        ws2.onClose = () => { console.log(`Disconnected from therun.gg for ${usernames[1]}`); }
 
         // When data is recieved, add data to replicants
         ws1.onMessage = (data) => {
