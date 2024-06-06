@@ -24,7 +24,11 @@ module.exports = async function (nodecg) {
             console.log('No change in usernames');
             return;
         }
-        // Else, add new Twitch usernames to array, and continue
+        // Else, add new Twitch usernames to array, clear splits arrays, and continue
+        player1Data = [];
+        player2Data = [];
+        player1DataRep.value = player1Data;
+        player2DataRep.value = player2Data;
         usernames = newVal;
         console.log(usernames[0], usernames[1]);
 
