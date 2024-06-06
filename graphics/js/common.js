@@ -82,9 +82,8 @@ $(() => {
     function updateStats(player, data)
     {
         let len = data.length - 1;
-        console.log(len);
+        console.log("Splits length -1: " + len);
         if (player == 1) {
-            console.log(data[len].pbDelta);
             p1StatsPB.html(data[len].pbTime);
             p1StatsPBDelta.html(data[len].pbDelta);
             p1StatsSOB.html(data[len].sumOfBest);

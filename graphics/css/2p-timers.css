@@ -1,3 +1,26 @@
+.player-name {
+    position: absolute;
+    width: 600px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 48px;
+    line-height: 75px;
+    color: #F2FBFF;
+}
+#player1 {
+    justify-content: left;
+    left: 16px;
+    top: 593px;
+}
+#player2 {
+    justify-content: right;
+    left: 1304px;
+    top: 593px;
+}
+
 #commentary-container {
     left: 0px;
     top: 670px;

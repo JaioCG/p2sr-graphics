@@ -32,7 +32,7 @@ function updateSplitData(data)
 
     return {
         'pbTime'            : msToTime(data.run.pb),
-        'pbDelta'           : msToTime(data.run.delta),
+        'pbDelta'           : showPlus(data.run.delta, msToTime(data.run.delta)),
         'sumOfBest'         : msToTime(data.run.sob),
         'bestPossibleTime'  : msToTime(data.run.bestPossible),
         'possibleTimeSave'  : msToTime(possTimesave),
@@ -73,10 +73,10 @@ function msToTime(duration)
     }
 }
 
-function showPlusMinus(delta, msToTimeOutput)
+function showPlus(delta, msToTimeOutput)
 {
     if (delta < 0)
-        return "-" + msToTimeOutput;
+        return msToTimeOutput;
     else
         return "+" + msToTimeOutput;
 }
