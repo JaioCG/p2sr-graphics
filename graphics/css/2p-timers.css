@@ -1,3 +1,4 @@
+/* Players container */
 .player-name {
     position: absolute;
     width: 600px;
@@ -21,6 +22,30 @@
     top: 593px;
 }
 
+/* Player deltas container */
+.player-delta {
+    position: absolute;
+    width: 150px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    line-height: 75px;
+    color: #F2FBFF;
+}
+#p1-delta {
+    left: 528px;
+    top: 593px;
+}
+#p2-delta {
+    left: 1241px;
+    top: 593px;
+}
+
+/* Commentary */
 #commentary-container {
     left: 0px;
     top: 670px;
@@ -86,7 +111,6 @@
 #stat-15 { grid-area: 6 / 1 / 7 / 3; }
 #stat-16 { grid-area: 6 / 3 / 7 / 5; }
 #stat-17 { grid-area: 6 / 5 / 7 / 7; }
-
 .left {
     justify-content: left;
     margin-left: 8px;
