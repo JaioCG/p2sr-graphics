@@ -26,7 +26,7 @@ var p2StatsBPT = $('#stat-14');
 var p1StatsTimesave = $('#stat-15');
 var p2StatsTimesave = $('#stat-17');
 
-// Update on-screen information from custom replicants
+// Update on-screen information from commentary replicants
 var commNamesRep = nodecg.Replicant('commNames', {defaultValue: ['Comm 1', 'Comm 2', 'Comm 3']});
 commNamesRep.on('change', function(newVal) {
     if (comm1.length) comm1.html(newVal[0]);
@@ -38,20 +38,23 @@ commNamesRep.on('change', function(newVal) {
 var runDataActiveRun = nodecg.Replicant('runDataActiveRun', 'nodecg-speedcontrol');
 runDataActiveRun.on('change', (newVal) => {
 	if (newVal) {
-        // Send Twitch information to extension
-        var twitchUsernames;
-        var team = newVal.teams[0];
-        if (team) twitchUsernames = team.players.map((player) => player.social.twitch);
+        // Send Twitch information to extension (index.js)
+        var twitchUsernames = [];
+        if (newVal.teams[0]) twitchUsernames = newVal.teams[0].players.map((player) => player.social.twitch);
         nodecg.sendMessage('twitchUsernames', twitchUsernames);
-        // Set game title (usually tournament match number)
+
+        // Set game title if exists (usually tournament match number)
         if (gameTitle.length) gameTitle.html(newVal.game);
-        // Update player names wherever neccesary
+
+        // Update player names if exists
         if (players.length || player1.length) {
             var playerNames;
-            var team = newVal.teams[0];
-            if (team) players.html(team.players.map((player) => player.name).join(', '));
-            if (team) playerNames = team.players.map((player) => player.name);
-            console.log(playerNames);
+
+            // Omnibar
+            if (newVal.teams[0]) players.html(newVal.teams[0].players.map((player) => player.name).join(', '));
+
+            // Game scenes
+            if (newVal.teams[0]) playerNames = newVal.teams[0].players.map((player) => player.name);
             if (player1.length) player1.html(playerNames[0]);
             if (player2.length) player2.html(playerNames[1]);
             if (player3.length) player3.html(playerNames[2]);
@@ -64,7 +67,7 @@ runDataActiveRun.on('change', (newVal) => {
     }
 });
 
-// Update Statistics
+// Get therun.gg statistics from extension
 const player1DataRep = nodecg.Replicant('player1Data');
 const player2DataRep = nodecg.Replicant('player2Data');
 player1DataRep.on('change', (newVal) => {
@@ -78,11 +81,11 @@ player2DataRep.on('change', (newVal) => {
     updateStats(2, arr);
 });
 
-// Update statistics on screen (2p-timers)
+// Update statistics on screen
 function updateStats(player, data)
 {
     let len = data.length - 1;
-    console.log("Splits length -1: " + len);
+    console.log("Splits length - 1: " + len);
     if (player == 1) {
         p1StatsPB.html(data[len].pbTime);
         p1StatsPBDelta.html(data[len].pbDelta);

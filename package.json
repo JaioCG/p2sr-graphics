@@ -27,6 +27,13 @@
         "width": 3,
         "file": "commentary-control.html",
         "headerColor": "#525F78"
+      },
+      {
+        "name": "therun-control",
+        "title": "TheRun Control",
+        "width": 3,
+        "file": "therun-control.html",
+        "headerColor": "#525F78"
       }
     ],
     "graphics": [
