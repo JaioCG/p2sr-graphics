@@ -1,79 +1,56 @@
 const LiveWebSocket = require('therungg').LiveWebSocket;
 
 module.exports = async function (nodecg) {
-    // Variables for Twitch usernames
-    let usernames = [];
+    // Script variables
+    let ws1, ws2;
     var player1Data = [], player2Data = [];
     const player1DataRep = nodecg.Replicant('player1Data');
     const player2DataRep = nodecg.Replicant('player2Data');
 
-    // Util function to reset all arrays
-    function resetArrays()
-    {
-        player1Data = [];
-        player2Data = [];
-        player1DataRep.value = player1Data;
-        player2DataRep.value = player2Data;
-        console.log("Arrays reset from dashboard");
-
-        nodecg.sendMessage('resetSplitsArrays');
-    }
-
-    // Reset all arrays from dashboard panel
-    nodecg.listenFor('resetAllArrays', () => {
-        resetArrays();
-    });
-
-    // Populate variables from usernames taken from speedcontrol
-    // sendMessage call is in `graphics/js/common.js`
-    nodecg.listenFor('twitchUsernames', (newVal) => {
-        // If the value hasn't changed, don't do anything
-        if (arrayEquals(newVal, usernames)) {
-            console.log('No change in usernames');
-            return;
-        }
-        // Else, add new Twitch usernames to array, clear splits arrays, and continue
-        resetArrays();
-        usernames = newVal;
-        console.log(usernames[0], usernames[1]);
-
+    nodecg.listenFor('startTRGGWebsocketServer', usernames => {
         // Connect to therun.gg API
-        const ws1 = new LiveWebSocket(usernames[0]);
-        const ws2 = new LiveWebSocket(usernames[1]);
+        ws1 = new LiveWebSocket(usernames[0]);
+        ws2 = new LiveWebSocket(usernames[1]);
         ws1.onOpen = () => { console.log(`Connected to therun.gg for ${usernames[0]}`); }
         ws2.onOpen = () => { console.log(`Connected to therun.gg for ${usernames[1]}`); }
         ws1.onClose = () => { console.log(`Disconnected from therun.gg for ${usernames[0]}`); }
         ws2.onClose = () => { console.log(`Disconnected from therun.gg for ${usernames[1]}`); }
 
-        // When data is recieved, add data to replicants
+        // Listen for data from therun.gg API
         ws1.onMessage = (data) => {
-            console.log(`Data recieved for ${usernames[0]}. Current split: ${data.run.currentSplitName}`);
+            console.log(`Data recieved for ${usernames[0]}. Current split: ${data.run.currentSplitName}. Split index: ${data.run.currentSplitIndex}`);
             
             // If at start of run, clear the array from previous run
-            if (data.run.currentSplitIndex == 0) {
+            if (data.run.currentSplitIndex < 0) {
                 player1Data = [];
                 player1DataRep.value = player1Data;
+                nodecg.sendMessage('p1-reset-run');
             }
-
             // Update the array with new data
-            player1Data.push(updateSplitData(data));
+            if (data.run.currentSplitIndex > 0)
+                player1Data[data.run.currentSplitIndex] = updateSplitData(data);
             player1DataRep.value = player1Data;
-            console.log("Getting the data worked");
         }
         ws2.onMessage = (data) => {
-            console.log(`Data recieved for ${usernames[1]}. Current split: ${data.run.currentSplitName}`);
+            console.log(`Data recieved for ${usernames[1]}. Current split: ${data.run.currentSplitName}. Split index: ${data.run.currentSplitIndex}`);
             
             // If at start of run, clear the array from previous run
-            if (data.run.currentSplitIndex == 0) {
+            if (data.run.currentSplitIndex < 0) {
                 player2Data = [];
                 player2DataRep.value = player2Data;
+                nodecg.sendMessage('p2-reset-run');
             }
-
             // Update the array with new data
-            player2Data.push(updateSplitData(data));
+            if (data.run.currentSplitIndex > 0)
+                player2Data[data.run.currentSplitIndex] = updateSplitData(data);
             player2DataRep.value = player2Data;
-            console.log("Getting the data worked");
         }
+    });
+
+    nodecg.listenFor('stopTRGGWebsocketServer', () => {
+        // Disconnect from therun.gg API
+        ws1.connection.close();
+        ws2.connection.close();
     });
 };
 
@@ -81,7 +58,17 @@ module.exports = async function (nodecg) {
 function updateSplitData(data)
 {
     // Random Math Stuff
-    var possTimesave = data.run.splits[data.run.currentSplitIndex].single.time - data.run.splits[data.run.currentSplitIndex].single.bestAchievedTime;
+    let possTimesave;
+    if (data.run.currentSplitIndex == 0)
+        possTimesave = data.run.splits[data.run.currentSplitIndex].single.time - data.run.splits[data.run.currentSplitIndex].single.bestAchievedTime;
+    else if (data.run.currentSplitIndex == -1)
+        possTimesave = 0;
+    else {
+        if (data.run.runPercentage != 1)
+            possTimesave = data.run.splits[data.run.currentSplitIndex - 1].single.time - data.run.splits[data.run.currentSplitIndex - 1].single.bestAchievedTime;
+        else
+            possTimesave = 0;
+    }
 
     return {
         'pbTime'            : msToTime(data.run.pb),
@@ -133,12 +120,4 @@ function showPlus(delta, msToTimeOutput)
         return msToTimeOutput;
     else
         return "+" + msToTimeOutput;
-}
-
-// Util function to compare arrays (used for twitch usernames)
-function arrayEquals(a, b) {
-    return Array.isArray(a) &&
-        Array.isArray(b) &&
-        a.length === b.length &&
-        a.every((val, index) => val === b[index]);
 }

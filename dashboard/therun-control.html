@@ -2,22 +2,45 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-
+        <!-- https://github.com/finnhvman/matter -->
+        <link rel="stylesheet" href="https://res.cloudinary.com/finnhvman/raw/upload/matter/matter-0.2.2.css" />
+        <link rel="stylesheet" href="./css/matter.css" />
         <style>
             .grid-container {
                 display: grid;
                 grid-template-columns: auto auto;
-                grid-gap: 5px;
+                grid-gap: 0px;
                 padding: 0px;
             }
 
             .grid-item {
-                padding: 4px;
+                border: 1px solid #525f78;
+                padding: 5px;
             }
         </style>
 	</head>
 	<body>
-        <button id="resetArrays">Reset All Arrays</button>
+        <div class="grid-container">
+            <div class="grid-item">
+                <div class="matter-h5">Player 1</div>
+                <div class="matter-body1" id="p1-username">Twitch Username: {NAME}</div>
+                <br><br>
+                <div class="matter-h6">Current Split</div>
+                <div class="matter-body1" id="p1-split">{TESTSPLIT}</div>
+            </div>
+            <div class="grid-item">
+                <div class="matter-h5">Player 2</div>
+                <div class="matter-body1" id="p2-username">Twitch Username: {NAME}</div>
+                <br><br>
+                <div class="matter-h6">Current Split</div>
+                <div class="matter-body1" id="p2-split">{TESTSPLIT}</div>
+            </div>
+        </div>
+
+        <br>
+
+        <button class="matter-button-contained matter-success" onclick="startWebsocket()">Start Websockets</button>
+        <button class="matter-button-contained matter-error" onclick="stopWebsocket()">Stop Websockets</button>
 
 		<script src="./js/therun-control.js"></script>
 	</body>

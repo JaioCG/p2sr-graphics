@@ -26,14 +26,16 @@
         "title": "Commentary Control",
         "width": 3,
         "file": "commentary-control.html",
-        "headerColor": "#525F78"
+        "headerColor": "#525F78",
+        "workspace": "p2sr"
       },
       {
         "name": "therun-control",
         "title": "TheRun Control",
         "width": 3,
         "file": "therun-control.html",
-        "headerColor": "#525F78"
+        "headerColor": "#525F78",
+        "workspace": "p2sr"
       }
     ],
     "graphics": [

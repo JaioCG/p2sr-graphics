@@ -1,0 +1,23 @@
+/* Text input color changes (to light mode) */
+.matter-textfield-standard > input,
+.matter-textfield-standard > textarea {
+    border-bottom: solid 1px rgba(204, 204, 204, 0.6);
+    color: rgba(255, 255, 255, 1);
+    caret-color: rgb(var(--matter-helper-theme));
+}
+.matter-textfield-standard > input + span,
+.matter-textfield-standard > textarea + span {
+    color: rgba(204, 204, 204, 0.6);
+}
+.matter-textfield-standard > input + span::after,
+.matter-textfield-standard > textarea + span::after {
+    background-color: rgb(var(--matter-helper-theme));
+}
+.matter-textfield-standard:hover > input,
+.matter-textfield-standard:hover > textarea {
+    border-bottom-color: rgba(204, 204, 204, 0.87);
+}
+.matter-textfield-standard > input:focus + span,
+.matter-textfield-standard > textarea:focus + span {
+    color: rgb(var(--matter-helper-theme));
+}
